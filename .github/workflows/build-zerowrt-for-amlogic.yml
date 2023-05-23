@@ -170,8 +170,8 @@ on:
           - dev
 
 env:
-  TZ: America/New_York
-  IMAGEBUILDER_SH: config-openwrt/imagebuilder/imagebuilder.sh
+  TZ: Indonesia/Jakarta
+  IMAGEBUILDER_SH: config/imgbuilder/imgbuilder.sh
 
 jobs:
   build:
