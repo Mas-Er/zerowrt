@@ -55,47 +55,21 @@ error_msg() {
 
 # Downloading OpenWrt ImageBuilder
 download_imagebuilder() {
+    cd ${make_path}
     echo -e "${STEPS} Start downloading OpenWrt files..."
+
     # Downloading imagebuilder files
-    # Download example: https://downloads.openwrt.org/releases/21.02.3/targets/armvirt/64/openwrt-imagebuilder-21.02.3-armvirt-64.Linux-x86_64.tar.xz    #
-
-    # Var configuration
-    if [[ ${rebuild_branch} = 18.* || ${rebuild_branch} = 19.* ]]; then
-        export openwrt_rpi="brcm2708"
-    elif [[ ${rebuild_branch} = 21.* || ${rebuild_branch} = 22.* ]]; then
-        export openwrt_rpi="bcm27xx"
+    if [[ "${op_sourse}" == "openwrt" ]]; then
+        download_file="https://downloads.openwrt.org/releases/${op_branch}/targets/armvirt/64/openwrt-imagebuilder-${op_branch}-armvirt-64.Linux-x86_64.tar.xz"
+    else
+        download_file="https://downloads.immortalwrt.org/releases/${op_branch}/targets/armvirt/64/immortalwrt-imagebuilder-${op_branch}-armvirt-64.Linux-x86_64.tar.xz"
     fi
-
-    if [[ ${rpi_board} = bcm2708 ]]; then
-        export ARCH="arm_arm1176jzf-s_vfp"
-        export MODEL="rpi"
-        export SHORT_ARCH="armv6"
-    elif [[ ${rpi_board} = bcm2709 ]]; then
-        export ARCH="arm_cortex-a7_neon-vfpv4"
-        export MODEL="rpi-2"
-        export SHORT_ARCH="armv7"
-    elif [[ ${rpi_board} = bcm2710 ]]; then
-        export ARCH="aarch64_cortex-a53"
-        export MODEL="rpi-3"
-        export SHORT_ARCH="arm64"
-    elif [[ ${rpi_board} = bcm2711 ]]; then
-        export ARCH="aarch64_cortex-a72"
-        export MODEL="rpi-4"
-        export SHORT_ARCH="arm64"
-    fi
-
-    # download_file="https://downloads.openwrt.org/releases/${rebuild_branch}/targets/armvirt/64/openwrt-imagebuilder-${rebuild_branch}-armvirt-64.Linux-x86_64.tar.xz"
-    download_file="https://downloads.openwrt.org/releases/${rebuild_branch}/targets/${openwrt_rpi}/${rpi_board}/openwrt-imagebuilder-${rebuild_branch}-${openwrt_rpi}-${rpi_board}.Linux-x86_64.tar.xz"
     wget -q ${download_file}
     [[ "${?}" -eq "0" ]] || error_msg "Wget download failed: [ ${download_file} ]"
 
     # Unzip and change the directory name
-    tar -xJf openwrt-imagebuilder-* && sync && rm -f openwrt-imagebuilder-*.tar.xz
-    mv -f openwrt-imagebuilder-* openwrt
-
-    # For packages.txt and disabled.txt
-    cp ${make_path}/config/packages.txt ${imagebuilder_path}
-    cp ${make_path}/config/disabled.txt ${imagebuilder_path}
+    tar -xJf *-imagebuilder-* && sync && rm -f *-imagebuilder-*.tar.xz
+    mv -f *-imagebuilder-* ${openwrt_dir}
 
     sync && sleep 3
     echo -e "${INFO} [ ${make_path} ] directory status: $(ls . -l 2>/dev/null)"
