@@ -6,7 +6,7 @@
 # Download options: https://downloads.openwrt.org/releases
 #=====================================================================================
 
-name: Build ZeroWrt with ImageBuilder
+name: Build ZeroWrt Amlogic with ImageBuilder
 
 on:
   repository_dispatch:
