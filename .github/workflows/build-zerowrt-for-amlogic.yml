@@ -12,14 +12,12 @@ on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
-      branch:
-        description: "Select Version Release"
+      releases_branch:
+        description: "Select the releases branch"
         required: false
-        default: "21.02.6"
+        default: "openwrt:22.03.3"
         type: choice
         options:
-          - 21.02.6
-          - 18.06
       openwrt_board:
         description: "Select Amlogic"
         required: false
@@ -75,7 +73,7 @@ jobs:
         id: imagebuilder
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
-          RELEASES_BRANCH="${{ github.event.inputs.branch }}"
+          RELEASES_BRANCH="${{ inputs.releases_branch }}"
           RPI_BOARD="${{ github.event.inputs.openwrt_board }}"
           BOOTFS="${{ github.event.inputs.openwrt_boot_size }}"
           ROOTFS="${{ github.event.inputs.openwrt_root_size }}"
