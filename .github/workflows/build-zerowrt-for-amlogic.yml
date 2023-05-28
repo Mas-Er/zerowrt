@@ -12,10 +12,10 @@ on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
-      releases_branch:
+      branch:
         description: "Select the releases branch"
         required: false
-        default: "openwrt:22.03.3"
+        default: "21.02.6"
         type: choice
         options:
           - 21.02.6
@@ -75,7 +75,7 @@ jobs:
         id: imagebuilder
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
-          RELEASES_BRANCH="${{ inputs.releases_branch }}"
+          RELEASES_BRANCH="${{ inputs.branch }}"
           RPI_BOARD="${{ github.event.inputs.openwrt_board }}"
           BOOTFS="${{ github.event.inputs.openwrt_boot_size }}"
           ROOTFS="${{ github.event.inputs.openwrt_root_size }}"
