@@ -171,7 +171,7 @@ on:
 
 env:
   TZ: Asia/Jakarta
-  IMAGEBUILDER_SH: config/imagebuilder/imagebuilder.sh
+  IMAGEBUILDER_SH: config/imgbuilder/imagebuilder.sh
 
 jobs:
   build:
