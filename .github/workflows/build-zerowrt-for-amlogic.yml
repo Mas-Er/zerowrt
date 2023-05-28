@@ -18,6 +18,8 @@ on:
         default: "openwrt:22.03.3"
         type: choice
         options:
+          - 21.02.6
+          - 18.06
       openwrt_board:
         description: "Select Amlogic"
         required: false
