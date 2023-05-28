@@ -15,13 +15,11 @@ on:
       branch:
         description: "Select Version Release"
         required: false
-        default: "22.03.2"
+        default: "21.02.6"
         type: choice
         options:
-          - 22.03.2
-          - 21.02.5
-          - 19.07.10
-          - 18.06.9
+          - 21.02.6
+          - 18.06
       openwrt_board:
         description: "Select Amlogic"
         required: false
