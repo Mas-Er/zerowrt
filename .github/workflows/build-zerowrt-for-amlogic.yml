@@ -33,7 +33,7 @@ on:
       openwrt_boot_size:
         description: "Write bootfs size [Mb]"
         required: false
-        default: "50"
+        default: "250"
       openwrt_root_size:
         description: "Write rootfs size [Mb]"
         required: false
