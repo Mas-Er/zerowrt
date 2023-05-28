@@ -23,24 +23,23 @@ on:
           - 19.07.10
           - 18.06.9
       openwrt_board:
-        description: "Select Rpi Board"
+        description: "Select Amlogic"
         required: false
-        default: "bcm2710"
+        default: "s905"
         type: choice
         options:
           - all
-          - bcm2708
-          - bcm2709
-          - bcm2710
-          - bcm2711
+          - s905
+          - s905x
+          - s905x-t95
       openwrt_boot_size:
-        description: "Write bootfs size [>30 Mb]"
+        description: "Write bootfs size [Mb]"
         required: false
-        default: "30"
+        default: "50"
       openwrt_root_size:
-        description: "Write rootfs size [>300 Mb]"
+        description: "Write rootfs size [Mb]"
         required: false
-        default: "300"
+        default: "2048"
       openwrt_address:
         description: "Write ip address openwrt"
         required: false
@@ -99,7 +98,7 @@ jobs:
           allowUpdates: true
           token: ${{ secrets.GH_TOKEN }}
           body: |
-            This is ZeroWrt firmware for RaspberryPi
+            This is ZeroWrt firmware for Amlogic
             * Firmware information
             Default IP: ${{ env.IP_ADDRESS }}
             Default username: root
